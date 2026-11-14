@@ -1,6 +1,6 @@
-file(GLOB_RECURSE qs_tests_sources CONFIGURE_DEPENDS *.cpp *.cc)
+file(GLOB_RECURSE blitz_tests_sources CONFIGURE_DEPENDS *.cpp *.cc)
 
-if (NOT qs_tests_sources)
+if (NOT blitz_tests_sources)
   return()
 endif()
 
@@ -14,6 +14,6 @@ set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 include(GoogleTest)
 
-add_executable(qs_tests ${qs_tests_sources})
-target_link_libraries(qs_tests PRIVATE qs_bench qs_warnings GTest::gtest_main)
-gtest_discover_tests(qs_tests)
+add_executable(blitz_tests ${blitz_tests_sources})
+target_link_libraries(blitz_tests PRIVATE blitz_bench blitz_warnings GTest::gtest_main)
+gtest_discover_tests(blitz_tests)
