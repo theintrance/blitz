@@ -55,7 +55,7 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 numactl --cpunodebind=0 --membind=0 taskset -c 2 ./build/bench/bin/bench_selftest --csv run.csv
 ```
 
-양식의 코드, 입력 데이터, 빌드, 장비, OS, CPU 설정, 실행 조건 항목은 스크립트로 모읍니다. 출력의 각 절을 양식의 같은 제목 아래에 붙여 넣습니다. 빌드 디렉터리 기본값은 `build/bench`이고 `-b`로 바꿀 수 있습니다. 입력 파일을 넘기면 크기와 sha256을 함께 적습니다.
+양식의 코드, 입력 데이터, 빌드, 장비, OS, CPU 설정, 실행 조건 항목은 스크립트로 모읍니다. 출력은 영어이고 절 순서는 양식과 같습니다(Code, Input data, Build, Machine, OS, CPU settings, Run conditions). 빌드 디렉터리 기본값은 `build/bench`이고 `-b`로 바꿀 수 있습니다. 입력 파일을 넘기면 크기와 sha256을 함께 적습니다.
 
 ```bash
 ./scripts/collect-env.sh
