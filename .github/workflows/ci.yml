@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CMAKE_BUILD_PARALLEL_LEVEL: 4
+
+jobs:
+  build:
+    name: ${{ matrix.cxx }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cxx: [g++, clang++]
+    env:
+      CXX: ${{ matrix.cxx }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Compiler version
+        run: $CXX --version
+
+      - name: Configure (debug)
+        run: cmake --preset debug
+
+      - name: Build (debug)
+        run: cmake --build --preset debug
+
+      - name: Test (debug)
+        run: ctest --preset debug
+
+      - name: Configure (bench)
+        run: cmake --preset bench
+
+      - name: Build (bench)
+        run: cmake --build --preset bench
