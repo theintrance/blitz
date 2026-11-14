@@ -1,0 +1,14 @@
+/build/
+/cmake-build-*/
+/compile_commands.json
+/.cache/
+
+/data/*
+!/data/.gitkeep
+
+.vscode/
+.idea/
+.claude/
+*.swp
+*~
+.DS_Store
