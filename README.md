@@ -38,6 +38,29 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 - 측정 도구 사용법, 백분위수 정의, 타이머 오버헤드, 한계는 [bench/README.md](bench/README.md)에 있습니다.
 - 측정 수치는 `bench` 프리셋으로 빌드한 실행 파일에서만 얻습니다. Debug·sanitizer 빌드의 지연시간은 기록하지 않습니다.
 - `-march=native`는 기본으로 켜지 않습니다. 켜서 측정했다면 측정 기록에 적습니다.
+- `bench_selftest`는 출력 맨 위 `[build]`에 컴파일러, 빌드 종류, 플래그, sanitizer 여부를 찍습니다. 측정용 빌드가 아니면 경고를 붙입니다.
+
+## 측정 기록
+
+측정할 때마다 [양식](docs/templates/measurement-record.md)을 복사해 `bench/results/YYYY-MM-DD-이름.md`로 저장하고 커밋합니다.
+
+- 기록은 고치지 않고 새 파일로 추가합니다. 느려진 결과도 지우지 않습니다.
+- 프로그램을 3회 이상 실행해 실행별 수치를 모두 적습니다. 한 번만 실행한 결과는 기록하지 않습니다.
+- 개발 장비(macOS, 가상머신)에서 잰 기록은 제목에 "참고용"을 붙입니다. 서로 다른 장비의 절대 수치는 비교하지 않습니다.
+- 서버에서는 코어를 고정해 실행합니다. 소켓이 두 개면 CPU와 메모리를 같은 쪽에 묶습니다.
+- 측정 전에 `uptime`으로 다른 사용자의 부하를 확인해 적습니다.
+- 코드를 모두 커밋한 상태에서 빌드하고 잽니다. 기록의 커밋 해시가 측정한 코드를 가리켜야 합니다.
+
+```bash
+numactl --cpunodebind=0 --membind=0 taskset -c 2 ./build/bench/bin/bench_selftest --csv run.csv
+```
+
+양식의 코드, 입력 데이터, 빌드, 장비, OS, CPU 설정, 실행 조건 항목은 스크립트로 모읍니다. 출력의 각 절을 양식의 같은 제목 아래에 붙여 넣습니다. 빌드 디렉터리 기본값은 `build/bench`이고 `-b`로 바꿀 수 있습니다. 입력 파일을 넘기면 크기와 sha256을 함께 적습니다.
+
+```bash
+./scripts/collect-env.sh
+./scripts/collect-env.sh -b build/bench data/sample.itch
+```
 
 ## 디렉터리
 
