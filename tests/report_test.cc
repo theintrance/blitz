@@ -24,6 +24,16 @@ TEST(Report, WarnsWhenTooFewSamplesForP999) {
   EXPECT_EQ(enough.str().find("warning"), std::string::npos);
 }
 
+TEST(Report, BuildInfoNamesCompilerAndBuildType) {
+  std::ostringstream out;
+  print_build_info(out);
+  const std::string text = out.str();
+  EXPECT_EQ(text.rfind("[build]\n", 0), 0u);
+  EXPECT_NE(text.find("compiler"), std::string::npos);
+  EXPECT_NE(text.find("build_type"), std::string::npos);
+  EXPECT_NE(text.find("sanitize"), std::string::npos);
+}
+
 TEST(Report, CsvRowMatchesHeaderColumns) {
   std::ostringstream header;
   write_csv_header(header);

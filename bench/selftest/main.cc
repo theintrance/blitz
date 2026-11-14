@@ -66,6 +66,9 @@ int main(int argc, char** argv) {
     blitz::bench::write_csv_header(csv);
   }
 
+  blitz::bench::print_build_info(std::cout);
+  std::cout << '\n';
+
   blitz::bench::print_timer_overhead(blitz::bench::measure_timer_overhead(kTimerSamples), std::cout);
   std::cout << '\n';
 
