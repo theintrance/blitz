@@ -35,6 +35,7 @@ cmake --build --preset bench
 taskset -c 2 ./build/bench/bin/bench_selftest
 ```
 
+- 측정 도구 사용법, 백분위수 정의, 타이머 오버헤드, 한계는 [bench/README.md](bench/README.md)에 있습니다.
 - 측정 수치는 `bench` 프리셋으로 빌드한 실행 파일에서만 얻습니다. Debug·sanitizer 빌드의 지연시간은 기록하지 않습니다.
 - `-march=native`는 기본으로 켜지 않습니다. 켜서 측정했다면 측정 기록에 적습니다.
 
