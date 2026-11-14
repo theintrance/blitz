@@ -40,3 +40,14 @@ jobs:
 
       - name: Build (bench)
         run: cmake --build --preset bench
+
+  lint:
+    name: cpplint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v10.3.3
+
+      - name: cpplint
+        run: ./scripts/run-cpplint.sh

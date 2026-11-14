@@ -49,6 +49,7 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 | `tests/` | 단위 테스트 `qs_tests` (GoogleTest) |
 | `simulator/`, `itch/`, `book/`, `pipeline/` | 2주차 이후 모듈 |
 | `docs/templates/` | 측정 조건 기록 양식 |
+| `scripts/` | 개발 보조 스크립트 |
 | `data/` | ITCH 샘플 (git에 올리지 않음) |
 
 ## 소스 추가
@@ -68,3 +69,9 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 ## 코드 스타일
 
 `.clang-format`을 따릅니다 (arboris와 같은 설정).
+
+cpplint 검사는 `CPPLINT.cfg` 설정으로 실행합니다. [uv](https://docs.astral.sh/uv/)가 필요합니다.
+
+```bash
+./scripts/run-cpplint.sh
+```
