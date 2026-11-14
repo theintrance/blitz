@@ -4,9 +4,9 @@
 #include <span>
 #include <vector>
 
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 class LatencyRecorder {
  public:

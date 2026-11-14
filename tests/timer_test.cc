@@ -3,9 +3,9 @@
 #include <cstddef>
 #include <stdexcept>
 
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 TEST(Timer, NeverGoesBackwards) {

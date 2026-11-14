@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <optional>
 
-namespace qs::bench {
+namespace blitz::bench {
 
 using ns_t = std::uint64_t;
 

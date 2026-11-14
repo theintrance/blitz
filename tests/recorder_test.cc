@@ -2,9 +2,9 @@
 
 #include <vector>
 
-#include "qs/bench/recorder.hpp"
+#include "blitz/bench/recorder.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 TEST(LatencyRecorder, StartsEmpty) {

@@ -3,10 +3,10 @@
 #include <cstddef>
 #include <iosfwd>
 
-#include "qs/bench/runner.hpp"
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/runner.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 inline constexpr std::size_t kMinSamplesForP999 = 1000;
 

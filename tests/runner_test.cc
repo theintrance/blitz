@@ -3,9 +3,9 @@
 #include <cstddef>
 #include <stdexcept>
 
-#include "qs/bench/runner.hpp"
+#include "blitz/bench/runner.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 TEST(Run, CallsWarmupPlusIterationsAndRecordsOnlyIterations) {

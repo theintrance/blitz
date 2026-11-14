@@ -7,9 +7,9 @@
 #include <limits>
 #include <span>
 
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 inline constexpr std::size_t kHistogramBuckets = std::numeric_limits<ns_t>::digits + 1;
 

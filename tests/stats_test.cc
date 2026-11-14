@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include <vector>
 
-#include "qs/bench/stats.hpp"
+#include "blitz/bench/stats.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 std::vector<ns_t> one_to(ns_t last) {

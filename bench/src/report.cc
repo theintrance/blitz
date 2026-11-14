@@ -1,11 +1,11 @@
-#include "qs/bench/report.hpp"
+#include "blitz/bench/report.hpp"
 
 #include <iomanip>
 #include <ostream>
 #include <sstream>
 #include <string_view>
 
-namespace qs::bench {
+namespace blitz::bench {
 
 namespace {
 

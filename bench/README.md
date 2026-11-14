@@ -5,13 +5,13 @@
 ## 사용법
 
 ```cpp
-#include "qs/bench/histogram.hpp"
-#include "qs/bench/report.hpp"
-#include "qs/bench/runner.hpp"
+#include "blitz/bench/histogram.hpp"
+#include "blitz/bench/report.hpp"
+#include "blitz/bench/runner.hpp"
 
-const qs::bench::RunResult result = qs::bench::run("parse", qs::bench::RunConfig{}, [&] { return parse(message); });
-qs::bench::print_report(result, std::cout);
-qs::bench::print_histogram(result.recorder.samples(), std::cout);
+const blitz::bench::RunResult result = blitz::bench::run("parse", blitz::bench::RunConfig{}, [&] { return parse(message); });
+blitz::bench::print_report(result, std::cout);
+blitz::bench::print_histogram(result.recorder.samples(), std::cout);
 ```
 
 - `run`은 warm-up 횟수만큼 실행하고(기록 안 함), 반복 횟수만큼 호출 앞뒤를 `now_ns()`로 재서 기록한 뒤 요약을 돌려줍니다.
@@ -20,12 +20,12 @@ qs::bench::print_histogram(result.recorder.samples(), std::cout);
 
 | 헤더 | 내용 |
 | --- | --- |
-| `qs/bench/timer.hpp` | `now_ns()` (`std::chrono::steady_clock`), `measure_timer_overhead()` |
-| `qs/bench/recorder.hpp` | `LatencyRecorder` |
-| `qs/bench/stats.hpp` | `percentile()`, `summarize()` |
-| `qs/bench/histogram.hpp` | 2의 거듭제곱 구간 히스토그램 |
-| `qs/bench/runner.hpp` | `run()`, `RunConfig`, `RunResult`, `do_not_optimize()` |
-| `qs/bench/report.hpp` | 사람이 읽는 출력, CSV |
+| `blitz/bench/timer.hpp` | `now_ns()` (`std::chrono::steady_clock`), `measure_timer_overhead()` |
+| `blitz/bench/recorder.hpp` | `LatencyRecorder` |
+| `blitz/bench/stats.hpp` | `percentile()`, `summarize()` |
+| `blitz/bench/histogram.hpp` | 2의 거듭제곱 구간 히스토그램 |
+| `blitz/bench/runner.hpp` | `run()`, `RunConfig`, `RunResult`, `do_not_optimize()` |
+| `blitz/bench/report.hpp` | 사람이 읽는 출력, CSV |
 
 ## 백분위수 정의
 

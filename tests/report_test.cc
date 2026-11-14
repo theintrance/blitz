@@ -4,10 +4,10 @@
 #include <sstream>
 #include <string>
 
-#include "qs/bench/report.hpp"
-#include "qs/bench/runner.hpp"
+#include "blitz/bench/report.hpp"
+#include "blitz/bench/runner.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 RunResult small_run(std::size_t iterations) {

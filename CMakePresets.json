@@ -17,7 +17,7 @@
       "inherits": "base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "QS_SANITIZE": "ON"
+        "BLITZ_SANITIZE": "ON"
       }
     },
     {
@@ -27,7 +27,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
         "CMAKE_CXX_FLAGS": "-fno-omit-frame-pointer",
-        "QS_SANITIZE": "OFF"
+        "BLITZ_SANITIZE": "OFF"
       }
     }
   ],

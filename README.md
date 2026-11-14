@@ -43,11 +43,11 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 
 | 경로 | 내용 |
 | --- | --- |
-| `cmake/` | 경고 옵션(`qs_warnings`), sanitizer 옵션(`QS_SANITIZE`) |
-| `bench/include/`, `bench/src/` | 측정 도구 라이브러리 `qs_bench` |
+| `cmake/` | 경고 옵션(`blitz_warnings`), sanitizer 옵션(`BLITZ_SANITIZE`) |
+| `bench/include/`, `bench/src/` | 측정 도구 라이브러리 `blitz_bench` |
 | `bench/selftest/` | 측정 도구 자체 점검 벤치마크 `bench_selftest` |
 | `bench/results/` | 측정 기록 |
-| `tests/` | 단위 테스트 `qs_tests` (GoogleTest) |
+| `tests/` | 단위 테스트 `blitz_tests` (GoogleTest) |
 | `simulator/`, `itch/`, `book/`, `pipeline/` | 2주차 이후 모듈 |
 | `docs/templates/` | 측정 조건 기록 양식 |
 | `scripts/` | 개발 보조 스크립트 |
@@ -59,12 +59,12 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 
 | 소스 위치 | 타깃 |
 | --- | --- |
-| `bench/src/` | `qs_bench` 정적 라이브러리. 소스가 없으면 헤더 전용 라이브러리 |
+| `bench/src/` | `blitz_bench` 정적 라이브러리. 소스가 없으면 헤더 전용 라이브러리 |
 | `bench/selftest/` | `bench_selftest` 실행 파일 |
-| `tests/` | `qs_tests` 실행 파일. 테스트 케이스마다 `ctest`에 등록 |
+| `tests/` | `blitz_tests` 실행 파일. 테스트 케이스마다 `ctest`에 등록 |
 
-- `qs_bench`를 링크한 타깃은 `bench/include/`를 include 경로로 씁니다.
-- 경고 옵션 `-Wall -Wextra -Wpedantic -Wconversion -Wshadow`는 `qs_warnings`를 링크한 타깃에만 붙습니다.
+- `blitz_bench`를 링크한 타깃은 `bench/include/`를 include 경로로 씁니다.
+- 경고 옵션 `-Wall -Wextra -Wpedantic -Wconversion -Wshadow`는 `blitz_warnings`를 링크한 타깃에만 붙습니다.
 - 새 모듈은 코드가 생기는 주차에 최상위 `CMakeLists.txt`에 `add_subdirectory`로 추가합니다.
 
 ## 코드 스타일

@@ -1,11 +1,11 @@
-#include "qs/bench/stats.hpp"
+#include "blitz/bench/stats.hpp"
 
 #include <algorithm>
 #include <numeric>
 #include <stdexcept>
 #include <vector>
 
-namespace qs::bench {
+namespace blitz::bench {
 
 ns_t percentile(std::span<const ns_t> sorted, std::uint64_t num, std::uint64_t den) {
   if (sorted.empty()) {

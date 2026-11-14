@@ -8,11 +8,11 @@
 #include <type_traits>
 #include <utility>
 
-#include "qs/bench/recorder.hpp"
-#include "qs/bench/stats.hpp"
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/recorder.hpp"
+#include "blitz/bench/stats.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 template <typename T>
 inline void do_not_optimize(const T& value) {

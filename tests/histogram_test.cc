@@ -6,9 +6,9 @@
 #include <string>
 #include <vector>
 
-#include "qs/bench/histogram.hpp"
+#include "blitz/bench/histogram.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 namespace {
 
 TEST(Histogram, PowerOfTwoBuckets) {

@@ -1,4 +1,4 @@
-#include "qs/bench/histogram.hpp"
+#include "blitz/bench/histogram.hpp"
 
 #include <algorithm>
 #include <cstdint>
@@ -8,7 +8,7 @@
 #include <sstream>
 #include <string>
 
-namespace qs::bench {
+namespace blitz::bench {
 
 namespace {
 

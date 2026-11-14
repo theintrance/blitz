@@ -10,17 +10,17 @@
 #include <thread>
 #include <vector>
 
-#include "qs/bench/histogram.hpp"
-#include "qs/bench/report.hpp"
-#include "qs/bench/runner.hpp"
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/histogram.hpp"
+#include "blitz/bench/report.hpp"
+#include "blitz/bench/runner.hpp"
+#include "blitz/bench/timer.hpp"
 
 namespace {
 
 constexpr std::size_t kTimerSamples = 1'000'000;
 constexpr std::size_t kSortSize = 1024;
 constexpr std::uint32_t kSortSeed = 42;
-constexpr qs::bench::ns_t kSleepNs = 100'000;
+constexpr blitz::bench::ns_t kSleepNs = 100'000;
 constexpr std::string_view kDefaultCsvPath = "bench_selftest.csv";
 
 std::vector<std::uint32_t> make_sort_input() {
@@ -32,12 +32,12 @@ std::vector<std::uint32_t> make_sort_input() {
   return input;
 }
 
-void report(const qs::bench::RunResult& result, std::ostream& csv) {
-  qs::bench::print_report(result, std::cout);
+void report(const blitz::bench::RunResult& result, std::ostream& csv) {
+  blitz::bench::print_report(result, std::cout);
   std::cout << '\n';
-  qs::bench::print_histogram(result.recorder.samples(), std::cout);
+  blitz::bench::print_histogram(result.recorder.samples(), std::cout);
   std::cout << '\n';
-  qs::bench::write_csv_row(result, csv);
+  blitz::bench::write_csv_row(result, csv);
 }
 
 bool is_missing_or_empty(const std::string& path) {
@@ -63,27 +63,27 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
   if (new_csv) {
-    qs::bench::write_csv_header(csv);
+    blitz::bench::write_csv_header(csv);
   }
 
-  qs::bench::print_timer_overhead(qs::bench::measure_timer_overhead(kTimerSamples), std::cout);
+  blitz::bench::print_timer_overhead(blitz::bench::measure_timer_overhead(kTimerSamples), std::cout);
   std::cout << '\n';
 
-  report(qs::bench::run("empty", qs::bench::RunConfig{}, [] {}), csv);
+  report(blitz::bench::run("empty", blitz::bench::RunConfig{}, [] {}), csv);
 
-  const qs::bench::RunResult sleep =
-      qs::bench::run("sleep_100us", qs::bench::RunConfig{.warmup = 10, .iterations = 1000},
-                     [] { std::this_thread::sleep_for(std::chrono::nanoseconds(kSleepNs)); });
+  const blitz::bench::RunResult sleep =
+      blitz::bench::run("sleep_100us", blitz::bench::RunConfig{.warmup = 10, .iterations = 1000},
+                        [] { std::this_thread::sleep_for(std::chrono::nanoseconds(kSleepNs)); });
   report(sleep, csv);
 
   const std::vector<std::uint32_t> input = make_sort_input();
   std::vector<std::uint32_t> work(input.size());
-  report(qs::bench::run("sort_1024", qs::bench::RunConfig{},
-                        [&input, &work] {
-                          std::copy(input.begin(), input.end(), work.begin());
-                          std::sort(work.begin(), work.end());
-                          return work.front();
-                        }),
+  report(blitz::bench::run("sort_1024", blitz::bench::RunConfig{},
+                           [&input, &work] {
+                             std::copy(input.begin(), input.end(), work.begin());
+                             std::sort(work.begin(), work.end());
+                             return work.front();
+                           }),
          csv);
 
   std::cout << "csv: " << csv_path << '\n';

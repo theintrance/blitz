@@ -4,9 +4,9 @@
 #include <cstdint>
 #include <span>
 
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/timer.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 struct Summary {
   std::size_t count;

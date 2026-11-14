@@ -1,4 +1,4 @@
-#include "qs/bench/timer.hpp"
+#include "blitz/bench/timer.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include <vector>
 
-#include "qs/bench/stats.hpp"
+#include "blitz/bench/stats.hpp"
 
-namespace qs::bench {
+namespace blitz::bench {
 
 ns_t now_ns() noexcept {
   const auto since_epoch = std::chrono::steady_clock::now().time_since_epoch();
