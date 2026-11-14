@@ -65,12 +65,13 @@ taskset -c 2 ./build/bench/bin/bench_selftest --csv bench_selftest.csv
 
 | 장비 | min | median | mean | 분해능 |
 | --- | --- | --- | --- | --- |
+| AMD EPYC 7532 (VMware 게스트, vCPU 8), Ubuntu 24.04.5, g++ 13.3, `bench` 프리셋, `taskset -c 2` | 21–30 ns | 50 ns | 50.4–52.6 ns | 21–30 ns |
 | Apple M2, macOS 27.0.1, Apple Clang 21, `bench` 프리셋 (참고용) | 0 ns | 0 ns | 14.6–17.1 ns | 41 ns |
-| 리눅스 서버 | 서버에서 측정 후 기록 | | | |
 
-- Apple Silicon의 `steady_clock`은 24 MHz로 증가해서 한 눈금이 41.67 ns입니다(출력에서는 41 또는 42).
-- 연속 호출 비용이 한 눈금보다 작아서 min과 median이 0으로 나옵니다. 이때는 평균이 실제 비용의 추정치이고, 41 ns보다 짧은 차이는 이 장비에서 구분할 수 없습니다.
-- 리눅스의 `steady_clock`은 `clock_gettime(CLOCK_MONOTONIC)`을 쓰며, 분해능과 오버헤드가 장비마다 다르므로 서버에서 잰 값을 위 표에 추가합니다.
+- 서버 수치의 측정 조건은 [bench/results/2026-11-14-sort-1024-epyc7532.md](results/2026-11-14-sort-1024-epyc7532.md)에 있습니다.
+- 서버에서는 `now_ns()` 두 번에 약 50 ns가 듭니다. 10배 규칙에 따르면 이 서버에서는 약 500 ns보다 짧은 함수의 호출별 지연을 믿기 어렵습니다.
+- 서버는 VMware 가상머신이라 시계와 vCPU 배치가 하이퍼바이저를 거칩니다. 물리 서버에서 재면 값이 달라질 수 있습니다.
+- Apple Silicon의 `steady_clock`은 24 MHz로 증가해서 한 눈금이 41.67 ns입니다(출력에서는 41 또는 42). 연속 호출 비용이 한 눈금보다 작아서 min과 median이 0으로 나오고, 이때는 평균이 실제 비용의 추정치입니다.
 
 ## 한계
 
