@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <optional>
+#include <vector>
 
 namespace blitz::bench {
 
@@ -19,5 +20,6 @@ struct TimerOverhead {
 };
 
 TimerOverhead measure_timer_overhead(std::size_t samples);
+TimerOverhead summarize_timer_deltas(std::vector<ns_t> deltas);
 
 }

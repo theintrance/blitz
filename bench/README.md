@@ -20,7 +20,7 @@ blitz::bench::print_histogram(result.recorder.samples(), std::cout);
 
 | 헤더 | 내용 |
 | --- | --- |
-| `blitz/bench/timer.hpp` | `now_ns()` (`std::chrono::steady_clock`), `measure_timer_overhead()` |
+| `blitz/bench/timer.hpp` | `now_ns()` (`std::chrono::steady_clock`), `measure_timer_overhead()`, `summarize_timer_deltas()` |
 | `blitz/bench/recorder.hpp` | `LatencyRecorder` |
 | `blitz/bench/stats.hpp` | `percentile()`, `summarize()` |
 | `blitz/bench/histogram.hpp` | 2의 거듭제곱 구간 히스토그램 |
@@ -65,9 +65,10 @@ taskset -c 2 ./build/bench/bin/bench_selftest --csv bench_selftest.csv
 
 | 장비 | min | median | mean | 분해능 |
 | --- | --- | --- | --- | --- |
-| AMD EPYC 7532 (VMware 게스트, vCPU 8), Ubuntu 24.04.5, g++ 13.3, `bench` 프리셋, `taskset -c 2` | 21–30 ns | 50 ns | 50.4–52.6 ns | 21–30 ns |
+| AMD EPYC 7532 (VMware 게스트, vCPU 8), Ubuntu 24.04.5, g++ 13.3, `bench` 프리셋, `taskset -c 2` | 21–30 ns | 50 ns | 50.4–52.6 ns | n/a |
 | Apple M2, macOS 27.0.1, Apple Clang 21, `bench` 프리셋 (참고용) | 0 ns | 0 ns | 14.6–17.1 ns | 41 ns |
 
+- 분해능(`resolution`)은 시계의 한 눈금입니다. 차이 중에 0이 있으면 두 호출이 같은 눈금에 들어간 것이므로, 0이 아닌 가장 작은 차이를 한 눈금으로 봅니다. 차이가 모두 0보다 크면 가장 작은 차이는 호출 비용이고 한 눈금은 min 이하라는 것만 알 수 있어서 `n/a`로 찍습니다.
 - 서버 수치의 측정 조건은 [bench/results/2026-11-14-sort-1024-epyc7532.md](results/2026-11-14-sort-1024-epyc7532.md)에 있습니다.
 - 서버에서는 `now_ns()` 두 번에 약 50 ns가 듭니다. 10배 규칙에 따르면 이 서버에서는 약 500 ns보다 짧은 함수의 호출별 지연을 믿기 어렵습니다.
 - 서버는 VMware 가상머신이라 시계와 vCPU 배치가 하이퍼바이저를 거칩니다. 물리 서버에서 재면 값이 달라질 수 있습니다.
