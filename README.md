@@ -47,12 +47,14 @@ taskset -c 2 ./build/bench/bin/bench_selftest
 - 기록은 고치지 않고 새 파일로 추가합니다. 느려진 결과도 지우지 않습니다.
 - 프로그램을 3회 이상 실행해 실행별 수치를 모두 적습니다. 한 번만 실행한 결과는 기록하지 않습니다.
 - 개발 장비(macOS, 가상머신)에서 잰 기록은 제목에 "참고용"을 붙입니다. 서로 다른 장비의 절대 수치는 비교하지 않습니다.
-- 서버에서는 코어를 고정해 실행합니다. 소켓이 두 개면 CPU와 메모리를 같은 쪽에 묶습니다.
+- 서버에서는 코어를 고정해 실행합니다. NUMA 노드가 둘 이상이면 CPU와 메모리를 같은 노드에 묶습니다. 노드 번호는 `lscpu`의 `NUMA nodeN CPU(s)` 줄에서 확인합니다.
 - 측정 전에 `uptime`으로 다른 사용자의 부하를 확인해 적습니다.
 - 코드를 모두 커밋한 상태에서 빌드하고 잽니다. 기록의 커밋 해시가 측정한 코드를 가리켜야 합니다.
 
+NUMA 노드가 둘 이상일 때는 `numactl` 하나로 CPU와 메모리를 함께 지정합니다. `numactl` 뒤에 `taskset`을 붙이면 CPU 지정이 `taskset` 값으로 덮어씌워져, CPU와 메모리가 다른 노드에 묶일 수 있습니다. 아래는 CPU 2가 node 0에 있을 때의 예입니다.
+
 ```bash
-numactl --cpunodebind=0 --membind=0 taskset -c 2 ./build/bench/bin/bench_selftest --csv run.csv
+numactl --physcpubind=2 --membind=0 ./build/bench/bin/bench_selftest --csv run.csv
 ```
 
 양식의 코드, 입력 데이터, 빌드, 장비, OS, CPU 설정, 실행 조건 항목은 스크립트로 모읍니다. 출력은 영어이고 절 순서는 양식과 같습니다(Code, Input data, Build, Machine, OS, CPU settings, Run conditions). 빌드 디렉터리 기본값은 `build/bench`이고 `-b`로 바꿀 수 있습니다. 입력 파일을 넘기면 크기와 sha256을 함께 적습니다.
