@@ -16,6 +16,28 @@ void write_row(std::ostream& out, std::string_view label, ns_t value) {
   out << "  " << std::left << std::setw(kLabelWidth) << label << std::right << std::setw(kValueWidth) << value << " ns";
 }
 
+void write_field(std::ostream& out, std::string_view label, std::string_view value) {
+  out << "  " << std::left << std::setw(kLabelWidth) << label << value << '\n';
+}
+
+}
+
+void print_build_info(std::ostream& out) {
+  const std::string_view build_type = BLITZ_BUILD_TYPE;
+  const bool sanitize = BLITZ_SANITIZE_ENABLED != 0;
+  const bool optimized = build_type == "RelWithDebInfo" || build_type == "Release";
+  std::ostringstream text;
+
+  text << "[build]\n";
+  write_field(text, "compiler", BLITZ_COMPILER " (" __VERSION__ ")");
+  write_field(text, "build_type", build_type.empty() ? "none" : build_type);
+  write_field(text, "cxx_flags", BLITZ_CXX_FLAGS);
+  write_field(text, "sanitize", sanitize ? "on" : "off");
+  if (sanitize || !optimized) {
+    text << "  warning: not a measurement build, use the bench preset\n";
+  }
+
+  out << text.str();
 }
 
 void print_report(const RunResult& result, std::ostream& out) {
